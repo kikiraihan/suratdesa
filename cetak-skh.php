@@ -6,7 +6,7 @@ header("location:index.php");
 include "koneksi.php";
 $id_skh  =  mysqli_escape_string($config,$_GET['id_skh']);
 $query   =  mysqli_query($config, " SELECT * FROM tbl_skh JOIN tbl_pegawai ON tbl_skh.id_pg = tbl_pegawai.id_pg WHERE tbl_skh.id_skh='$id_skh'");
-$data         =  mysqli_fetch_array($query);                   
+$data         =  mysqli_fetch_array($query);
 $id_skh       = $data['id_skh'];
 $nama         = $data['nama'];
 $jabatan      = $data['jabatan'];
@@ -25,7 +25,7 @@ $ket          = $data['ket'];
 
 function getRomawi($bln){
                 switch ($bln){
-                    case 1: 
+                    case 1:
                         return "I";
                         break;
                     case 2:
@@ -67,7 +67,7 @@ function getRomawi($bln){
 
 function bln($b){
                 switch ($b){
-                    case 1: 
+                    case 1:
                         return "Januari";
                         break;
                     case 2:
@@ -129,8 +129,8 @@ echo "<table align='center' border='0'>
             <td align='center'>
                 <h3 class=\"reset\" style=\"font-:arial\">PEMERINTAH KABUPATEN GORONTALO</h3>
                 <h3 class=\"reset\" id=\"margin-surat\">KECAMATAN TELAGA</h3>
-                <h3 class=\"reset\" id=\"margin-surat\"><b>DESA PILOHAYANGA</h3></b>
-                <h3 class=\"reset\">Jalan Hajar Utina Mootalu No.85</h3>
+                <h3 class=\"reset\" id=\"margin-surat\"><b>DESA PILOHAYANGA BARAT</h3></b>
+                <h3 class=\"reset\">Jln.Abdul Gandi Payuhi  Kode Pos 96181</h3>
             </td>
             <td style=\"width:120px\"></td>
         </tr>

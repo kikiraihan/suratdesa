@@ -30,7 +30,7 @@ header("location:index.php");
 					alert("No Surat belum di isi !");
 					form_skh.no_surat_skh.focus();
 					return (false);
-	
+
 				}else if(form_skh.nama.value == "0"){
 					alert("Nama belum di pilih !");
 					form_skh.nama.focus();
@@ -40,7 +40,7 @@ header("location:index.php");
 			return(true);
 			}
 	</script>
-	
+
 </head>
 <body>
 
@@ -71,7 +71,7 @@ header("location:index.php");
                                        $data=mysqli_fetch_assoc($query);
                                        echo "<a href='ubah-profil-instansi.php?id_instansi=$data[id_instansi]'>Profil Instansi</a>";
                                       ?>
-                                    
+
                             		</li>
                             		 <li>
                                      	<a href="user.php">User</a>
@@ -96,12 +96,12 @@ header("location:index.php");
                                 </a></li>
                                 <li class="active"><a href="tabel-skh.php"><i class="menu-icon icon-table"></i>TABEL SURAT
                                 </a></li>
-                                <li><a href="logout.php"><i class="menu-icon icon-signout"></i>LOGOUT 
+                                <li><a href="logout.php"><i class="menu-icon icon-signout"></i>LOGOUT
                                 </a></li>
                                 </ul>
                             </ul>
                         </div>
-                        <!--/.sidebar-->	
+                        <!--/.sidebar-->
 					<!--/.sidebar-->
 				</div><!--/.span3-->
 
@@ -154,7 +154,7 @@ header("location:index.php");
 													$result = mysqli_query($config, $sql);
 													while ($hasil = mysqli_fetch_array($result)) {
 													 	echo '<option value="'.$hasil['id_pg'].'">'.$hasil['jabatan'].' </option>';
-													 } 
+													 }
 												?>
 												</select>
 											</div>
@@ -172,13 +172,13 @@ header("location:index.php");
 												<button name="simpan" type="submit" class="btn">SIMPAN</button>
 											</div>
 										</div>
-										
+
 									</form>
 							</div>
 						</div>
 
-						
-						
+
+
 					</div><!--/.content-->
 				</div><!--/.span9-->
 			</div>
@@ -193,7 +193,7 @@ header("location:index.php");
                 $query = mysqli_query($config, "SELECT * FROM tbl_instansi WHERE id_instansi");
                 $data=mysqli_fetch_assoc($query);
                 ?>
-                &copy; <?php echo 'Kantor Desa '.$data['nm'] . " " .date('Y'); ?> 
+                &copy; <?php echo 'Kantor Desa '.$data['nm'] . " " .date('Y'); ?>
             </b>
 		</div>
 	</div>
