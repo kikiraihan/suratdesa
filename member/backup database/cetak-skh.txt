@@ -1,0 +1,198 @@
+<?php
+include "koneksi.php";
+$id_skh  =  $_GET['id_skh'];
+$query   =  mysqli_query($config, " SELECT * FROM  tbl_skh where id_skh='$id_skh'");
+$data    =  mysqli_fetch_assoc($query);
+
+
+
+function getRomawi($bln){
+                switch ($bln){
+                    case 1: 
+                        return "I";
+                        break;
+                    case 2:
+                        return "II";
+                        break;
+                    case 3:
+                        return "III";
+                        break;
+                    case 4:
+                        return "IV";
+                        break;
+                    case 5:
+                        return "V";
+                        break;
+                    case 6:
+                        return "VI";
+                        break;
+                    case 7:
+                        return "VII";
+                        break;
+                    case 8:
+                        return "VIII";
+                        break;
+                    case 9:
+                        return "IX";
+                        break;
+                    case 10:
+                        return "X";
+                        break;
+                    case 11:
+                        return "XI";
+                        break;
+                    case 12:
+                        return "XII";
+                        break;
+                }
+}
+
+
+function bln($b){
+                switch ($b){
+                    case 1: 
+                        return "Januari";
+                        break;
+                    case 2:
+                        return "Februari";
+                        break;
+                    case 3:
+                        return "Maret";
+                        break;
+                    case 4:
+                        return "April";
+                        break;
+                    case 5:
+                        return "Mei";
+                        break;
+                    case 6:
+                        return "Juni";
+                        break;
+                    case 7:
+                        return "Juli";
+                        break;
+                    case 8:
+                        return "Agustus";
+                        break;
+                    case 9:
+                        return "September";
+                        break;
+                    case 10:
+                        return "Oktober";
+                        break;
+                    case 11:
+                        return "November";
+                        break;
+                    case 12:
+                        return "Desember";
+                        break;
+                }
+}
+
+
+
+$bulan = date('n');
+$romawi = getRomawi($bulan);
+$tahun = date ('Y');
+$nomor = "No:245/BGM-TKBL/".$romawi."/".$tahun;
+
+$tgl   = date('d');
+$bulan = date('n');
+$tahun = date ('Y');
+$ubahangkakestring = bln($bulan);
+$bulanstring = $tgl. " , " .$ubahangkakestring . " , " .$tahun;
+
+require ('fpdf/fpdf.php');
+//setting awal
+$pdf = new FPDF();
+$pdf->AddPage('P','A4','cm');
+$pdf->SetFont('Times', 'B', 14);
+
+
+//memasukkan gambar untuk header
+$pdf->Image('logodesa/logodesa.png',10,10,20,25);
+//menggeser posisi sekarang
+
+//teks 1
+$pdf->SetFont('Times','B','14');
+$pdf->Cell(0,0.3,'PEMERINTAH KABUPATEN BONE BOLANGO',0,1,'C');
+
+//teks 2
+$pdf->SetFont('Times','B','14');
+$pdf->Cell(0,20,'KECAMATAN TILONGKABILA',0,1,'C');
+
+//teks 3
+$pdf->SetFont('Times','B','14');
+$pdf->Cell(0,2,'DESA BONGOIME',0,1,'C');
+
+//garis
+$pdf->SetLineWidth(1);
+$pdf->Line(10,36,198,36);
+$pdf->SetLineWidth(0);
+$pdf->Line(10,37,198,37);
+//kemudian kita tambahkan lagi baris baru menggunakan fungsi Ln()
+$pdf->Ln(15);
+ 
+//untuk posisinya biarkan saja 0 agar jarak spasinya tidak terlalu jauh
+$pdf->SetFont('Times','U','15');
+$pdf->Cell(0,2,'SURAT KETERANGAN HILANG',0,1,'C');
+$pdf->Ln(3);
+
+$pdf->SetFont('Times','B','14');
+$pdf->Cell(0,2,$nomor,0,1,'C');
+$pdf->Ln(10);
+
+$pdf->SetFont('Times','','12');
+$pdf->Cell(0,2,'Yang bertanda tangan dibawah ini        :',0,1);
+$pdf->Ln(10);
+
+$pdf->SetFont('Times','','12');
+$pdf->Cell(80,2,'Nama            :',0,1,'C');
+$pdf->Cell(0,0, $data["nama"] ,0,1,'C');
+$pdf->Ln(10);
+
+$pdf->SetFont('Times','','12');
+$pdf->Cell(80,2,'Jabatan         :',0,1,'C');
+$pdf->Cell(0,0,$data["jabatan"],0,1,'C');
+$pdf->Ln(10);
+
+$pdf->SetFont('Times','','12');
+$pdf->Cell(80,2,'Alamat          :',0,1,'C');
+$pdf->Cell(0,0,$data["alamat"],0,1,'C');
+$pdf->Ln(20);
+
+$pdf->SetFont('Times','','12');
+$pdf->Cell(0,2,'Menerangkan bahwa	:',0,1);
+$pdf->Ln(5);
+
+$pdf->SetFont('Times','B','12');
+$pdf->Cell(0,5,$data["ket"],0,1,'L');
+$pdf->Ln(20);
+
+
+
+
+$pdf->SetFont('Times','','12');
+$pdf->Cell(0,2,'Demikian surat keterangan hilang ini dibuat dan diberika kepada yang bersangkutan',0,1,'C');
+$pdf->Ln(5);
+
+$pdf->SetFont('Times','','12');
+$pdf->Cell(0,2,'untuk digunakan seperlunya.',0,1);
+$pdf->Ln(30);
+
+$pdf->SetFont('Times','','12');
+$pdf->Cell(0,2,'Bongoime, '.$bulanstring ,0,1,'R');
+$pdf->Ln(3);
+
+$pdf->SetFont('Times','','12');
+$pdf->Cell(0,2,'Kepala Desa Bongoime',0,1,'R');
+$pdf->Ln(20);
+
+$pdf->SetFont('Times','U','12');
+$pdf->Cell(0,2,$data['ttd'],0,1,'R');
+
+$pdf->Output();
+?>
+
+
+
